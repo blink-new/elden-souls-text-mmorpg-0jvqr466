@@ -6,9 +6,9 @@
 5 silly config load:file:/usr/local/etc/npmrc
 6 verbose title npm run lint --quiet
 7 verbose argv "run" "lint" "--" "--quiet"
-8 verbose logfile logs-max:10 dir:/home/user/.npm/_logs/2025-06-28T21_15_06_889Z-
-9 verbose logfile /home/user/.npm/_logs/2025-06-28T21_15_06_889Z-debug-0.log
-10 silly logfile start cleaning logs, removing 2 files
+8 verbose logfile logs-max:10 dir:/home/user/.npm/_logs/2025-06-28T21_18_29_125Z-
+9 verbose logfile /home/user/.npm/_logs/2025-06-28T21_18_29_125Z-debug-0.log
+10 silly logfile start cleaning logs, removing 1 files
 11 silly logfile done cleaning log files
 12 verbose cwd /home/user
 13 verbose os Linux 6.1.102
