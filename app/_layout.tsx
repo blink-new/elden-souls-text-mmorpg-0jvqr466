@@ -1,6 +1,7 @@
 import { Stack } from "expo-router";
 import { useFonts } from 'expo-font';
 import { useCallback } from 'react';
+import { CharacterProvider } from '../contexts/CharacterContext';
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -18,9 +19,11 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack onLayout={onLayoutRootView}>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-    </Stack>
+    <CharacterProvider>
+      <Stack onLayout={onLayoutRootView}>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+      </Stack>
+    </CharacterProvider>
   );
 }
 
@@ -90,11 +93,13 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="auth" options={{ headerShown: false }} />
-      <Stack.Screen name="character/create" options={{ headerShown: false }} />
-      <Stack.Screen name="+not-found" />
-    </Stack>
+    <CharacterProvider>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="auth" options={{ headerShown: false }} />
+        <Stack.Screen name="character/create" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found" />
+      </Stack>
+    </CharacterProvider>
   );
 }

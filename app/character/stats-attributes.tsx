@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useCharacter } from '../../contexts/CharacterContext';
 
 const AttributeItem = ({ label, value }: { label: string; value: number }) => (
   <View style={styles.attributeRow}>
@@ -11,25 +11,35 @@ const AttributeItem = ({ label, value }: { label: string; value: number }) => (
 );
 
 const StatsAttributesScreen = () => {
+  const { character } = useCharacter();
+
+  if (!character) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.header}>Loading...</Text>
+      </SafeAreaView>
+    );
+  }
+
   const stats = {
-    level: 75,
-    vigor: 30,
-    mind: 20,
-    endurance: 25,
-    strength: 35,
-    dexterity: 18,
-    intelligence: 10,
-    faith: 12,
-    arcane: 8,
+    level: character.level,
+    vigor: character.vigor,
+    mind: character.mind,
+    endurance: character.endurance,
+    strength: character.strength,
+    dexterity: character.dexterity,
+    intelligence: character.intelligence,
+    faith: character.faith,
+    arcane: character.arcane,
   };
 
   const attributes = {
-    hp: 1200,
-    fp: 150,
-    stamina: 125,
-    equipLoad: 70.5,
-    poise: 55,
-    discovery: 108,
+    hp: character.hp,
+    fp: character.fp,
+    stamina: character.stamina,
+    equipLoad: character.equip_load,
+    poise: character.poise,
+    discovery: character.discovery,
   };
 
   return (

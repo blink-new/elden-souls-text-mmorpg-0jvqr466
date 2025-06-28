@@ -1,17 +1,19 @@
-
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { useCharacter } from '../../contexts/CharacterContext';
 
 const CharacterCard = () => {
+  const { character } = useCharacter();
+
   return (
     <View style={styles.card}>
       <Image
-        source={{ uri: 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png' }}
+        source={{ uri: 'https://images.unsplash.com/photo-1583994009338-31c17554425b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }}
         style={styles.avatar}
       />
       <View style={styles.infoContainer}>
-        <Text style={styles.name}>Tarnished One</Text>
-        <Text style={styles.details}>Human Astrologer - Liurnia of the Lakes</Text>
+        <Text style={styles.name}>{character?.name || 'Character'}</Text>
+        <Text style={styles.level}>Level {character?.level || 1}</Text>
       </View>
       <View style={styles.levelBadge}>
         <Text style={styles.levelText}>25</Text>
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
-  details: {
+  level: {
     fontSize: 14,
     color: 'gray',
   },
