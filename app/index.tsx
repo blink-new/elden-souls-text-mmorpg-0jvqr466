@@ -107,11 +107,9 @@ const App = () => {
               <SubMenuButton text="Gathering" onPress={() => router.push('/crafting/gathering')} />
             </MenuButton>
             <MenuButton text="GAME SETTINGS" icon={<Settings color="gold" />}>
-              <SubMenuButton text="Gameplay" onPress={() => router.push('/settings/gameplay')} />
-              <SubMenuButton text="Controls" onPress={() => router.push('/settings/controls')} />
-              <SubMenuButton text="Audio" onPress={() => router.push('/settings/audio')} />
-              <SubMenuButton text="Graphics" onPress={() => router.push('/settings/graphics')} />
-              <SubMenuButton text="Account" onPress={() => router.push('/settings/account')} />
+              <SubMenuButton text="Save & Load Game" onPress={() => router.push('/settings/save-load-game')} />
+              <SubMenuButton text="Game Settings" onPress={() => router.push('/settings/game-settings')} />
+              <SubMenuButton text="Difficulty Mode" onPress={() => router.push('/settings/difficulty-mode')} />
             </MenuButton>
           </View>
         </ScrollView>
