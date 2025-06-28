@@ -88,10 +88,14 @@ const App = () => {
               <SubMenuButton text="Campaigns" onPress={() => router.push('/quests/campaigns')} />
             </MenuButton>
             <MenuButton text="ITEMS & EQUIPMENT" icon={<Briefcase color="gold" />}>
-              <SubMenuButton text="Inventory" onPress={() => router.push('/items/inventory')} />
-              <SubMenuButton text="Equipment Manager" onPress={() => router.push('/items/equipment-manager')} />
-              <SubMenuButton text="Item Sets" onPress={() => router.push('/items/item-sets')} />
-              <SubMenuButton text="Appearances" onPress={() => router.push('/items/appearances')} />
+              <SubMenuButton text="Inventory Management" onPress={() => router.push('/items/inventory-management')} />
+              <SubMenuButton text="Weapons" onPress={() => router.push('/items/weapons')} />
+              <SubMenuButton text="Armor and Apparel" onPress={() => router.push('/items/armor-apparel')} />
+              <SubMenuButton text="Consumables" onPress={() => router.push('/items/consumables')} />
+              <SubMenuButton text="Materials" onPress={() => router.push('/items/materials')} />
+              <SubMenuButton text="Item Rarity Guide" onPress={() => router.push('/items/item-rarity-guide')} />
+              <SubMenuButton text="Equipment Slots" onPress={() => router.push('/items/equipment-slots')} />
+              <SubMenuButton text="Set Bonuses" onPress={() => router.push('/items/set-bonuses')} />
             </MenuButton>
             <MenuButton text="CRAFTING" icon={<Hammer color="gold" />}>
               <SubMenuButton text="Professions" onPress={() => router.push('/crafting/professions')} />
