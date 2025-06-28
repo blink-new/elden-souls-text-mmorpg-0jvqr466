@@ -36,17 +36,26 @@ export default function RootLayout() {
   });
   const [session, setSession] = useState<Session | null>(null);
   const [initialized, setInitialized] = useState(false);
+  const [hasCharacter, setHasCharacter] = useState(false);
   const router = useRouter();
   const segments = useSegments();
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
+      if (session) {
+        const { data } = await supabase.from('characters').select().eq('user_id', session.user.id).single();
+        setHasCharacter(!!data);
+      }
       setInitialized(true);
     });
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
+      if (session) {
+        const { data } = await supabase.from('characters').select().eq('user_id', session.user.id).single();
+        setHasCharacter(!!data);
+      }
     });
 
     return () => {
@@ -60,11 +69,15 @@ export default function RootLayout() {
     const inAuthGroup = segments[0] === 'auth';
 
     if (session && !inAuthGroup) {
-      router.replace('/');
+      if (hasCharacter) {
+        router.replace('/');
+      } else {
+        router.replace('/character/create');
+      }
     } else if (!session) {
       router.replace('/auth/login');
     }
-  }, [initialized, session, segments]);
+  }, [initialized, session, segments, hasCharacter]);
 
   useEffect(() => {
     if (loaded) {
@@ -80,6 +93,7 @@ export default function RootLayout() {
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="auth" options={{ headerShown: false }} />
+      <Stack.Screen name="character/create" options={{ headerShown: false }} />
       <Stack.Screen name="+not-found" />
     </Stack>
   );
