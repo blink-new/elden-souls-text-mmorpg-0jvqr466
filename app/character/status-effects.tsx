@@ -1,14 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useCharacter } from '../../contexts/CharacterContext';
 
-const sampleEffects = [
-  { id: '1', name: 'Blessing of Strength', duration: '5m 30s', icon: 'https://img.icons8.com/ios-filled/50/00ff00/strength.png' },
-  { id: '2', name: 'Curse of Weakness', duration: '2m 10s', icon: 'https://img.icons8.com/ios-filled/50/ff0000/curse.png' },
-  { id: '3', name: 'Regeneration', duration: '10m 0s', icon: 'https://img.icons8.com/ios-filled/50/00ffff/regeneration.png' },
-];
-
-const EffectItem = ({ effect }: { effect: typeof sampleEffects[0] }) => (
+const EffectItem = ({ effect }: { effect: any }) => (
   <View style={styles.effectContainer}>
     <Image source={{ uri: effect.icon }} style={styles.effectIcon} />
     <View style={styles.effectTextContainer}>
@@ -19,11 +14,23 @@ const EffectItem = ({ effect }: { effect: typeof sampleEffects[0] }) => (
 );
 
 const StatusEffectsScreen = () => {
+  const { character } = useCharacter();
+
+  if (!character) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.header}>Loading...</Text>
+      </SafeAreaView>
+    );
+  }
+
+  const effects = character.status_effects || [];
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>Status Effects</Text>
       <FlatList
-        data={sampleEffects}
+        data={effects}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <EffectItem effect={item} />}
         contentContainerStyle={styles.listContainer}

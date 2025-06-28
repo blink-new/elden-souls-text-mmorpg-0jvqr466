@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useCharacter } from '../../contexts/CharacterContext';
 
 const SkillItem = ({ name, description }: { name: string; description: string }) => (
   <View style={styles.skillContainer}>
@@ -11,20 +11,30 @@ const SkillItem = ({ name, description }: { name: string; description: string })
 );
 
 const SkillsIncantationsScreen = () => {
-  const skills = [
-    { name: 'Lion\'s Claw', description: 'Somersault forward and strike foes with a heavy blow.' },
-    { name: 'Glintstone Pebble', description: 'Fires a magic projectile from a glintstone staff.' },
-    { name: 'Heal', description: 'Heals a moderate amount of HP.' },
-  ];
+  const { character } = useCharacter();
+
+  if (!character) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.header}>Loading...</Text>
+      </SafeAreaView>
+    );
+  }
+
+  const skills = character.skills || [];
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <Text style={styles.header}>Skills & Incantations</Text>
         <View style={styles.section}>
-          {skills.map((skill, index) => (
-            <SkillItem key={index} name={skill.name} description={skill.description} />
-          ))}
+          {skills.length === 0 ? (
+            <Text style={styles.noSkillsText}>No skills learned yet.</Text>
+          ) : (
+            skills.map((skill: any, index: number) => (
+              <SkillItem key={index} name={skill.name} description={skill.description} />
+            ))
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -63,6 +73,12 @@ const styles = StyleSheet.create({
   skillDescription: {
     color: '#ccc',
     fontSize: 14,
+  },
+  noSkillsText: {
+    color: '#ccc',
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 20,
   },
 });
 

@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useCharacter } from '../../contexts/CharacterContext';
 
 const EquipmentSlot = ({ slot, item }: { slot: string; item: string }) => (
   <View style={styles.slotRow}>
@@ -11,19 +11,29 @@ const EquipmentSlot = ({ slot, item }: { slot: string; item: string }) => (
 );
 
 const EquipmentArmoursScreen = () => {
+  const { character } = useCharacter();
+
+  if (!character) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.header}>Loading...</Text>
+      </SafeAreaView>
+    );
+  }
+
   const equipment = {
-    'Right Hand 1': 'Greatsword',
-    'Right Hand 2': '-',
-    'Left Hand 1': 'Kite Shield',
-    'Left Hand 2': '-',
-    Head: 'Knight Helm',
-    Chest: 'Knight Armor',
-    Arms: 'Knight Gauntlets',
-    Legs: 'Knight Greaves',
-    Talisman_1: 'Erdtree\'s Favor',
-    Talisman_2: 'Great-Jar\'s Arsenal',
-    Talisman_3: '-',
-    Talisman_4: '-',
+    'Right Hand 1': character.right_hand_1 || '-',
+    'Right Hand 2': character.right_hand_2 || '-',
+    'Left Hand 1': character.left_hand_1 || '-',
+    'Left Hand 2': character.left_hand_2 || '-',
+    Head: character.head || '-',
+    Chest: character.chest || '-',
+    Arms: character.arms || '-',
+    Legs: character.legs || '-',
+    Talisman_1: character.talisman_1 || '-',
+    Talisman_2: character.talisman_2 || '-',
+    Talisman_3: character.talisman_3 || '-',
+    Talisman_4: character.talisman_4 || '-',
   };
 
   return (
