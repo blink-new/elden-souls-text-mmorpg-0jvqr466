@@ -98,9 +98,13 @@ const App = () => {
               <SubMenuButton text="Set Bonuses" onPress={() => router.push('/items/set-bonuses')} />
             </MenuButton>
             <MenuButton text="CRAFTING" icon={<Hammer color="gold" />}>
-              <SubMenuButton text="Professions" onPress={() => router.push('/crafting/professions')} />
-              <SubMenuButton text="Recipes" onPress={() => router.push('/crafting/recipes')} />
-              <SubMenuButton text="Crafting Orders" onPress={() => router.push('/crafting/crafting-orders')} />
+              <SubMenuButton text="Smithing" onPress={() => router.push('/crafting/smithing')} />
+              <SubMenuButton text="Alchemy" onPress={() => router.push('/crafting/alchemy')} />
+              <SubMenuButton text="Enchanting" onPress={() => router.push('/crafting/enchanting')} />
+              <SubMenuButton text="Cooking" onPress={() => router.push('/crafting/cooking')} />
+              <SubMenuButton text="Materials" onPress={() => router.push('/crafting/materials')} />
+              <SubMenuButton text="Blueprints & Recipes" onPress={() => router.push('/crafting/blueprints-recipes')} />
+              <SubMenuButton text="Gathering" onPress={() => router.push('/crafting/gathering')} />
             </MenuButton>
             <MenuButton text="GAME SETTINGS" icon={<Settings color="gold" />}>
               <SubMenuButton text="Gameplay" onPress={() => router.push('/settings/gameplay')} />
