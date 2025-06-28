@@ -1,31 +1,38 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const sampleItems = [
-  { id: '1', name: 'Estus Flask', quantity: 5, icon: 'https://img.icons8.com/ios-filled/50/ffffff/potion.png' },
-  { id: '2', name: 'Firebomb', quantity: 10, icon: 'https://img.icons8.com/ios-filled/50/ff4500/fire-element.png' },
-  { id: '3', name: 'Throwing Knife', quantity: 15, icon: 'https://img.icons8.com/ios-filled/50/ffffff/throwing-knife.png' },
-  { id: '4', name: 'Gold Coin', quantity: 999, icon: 'https://img.icons8.com/ios-filled/50/ffd700/coins.png' },
+const windowWidth = Dimensions.get('window').width;
+const numColumns = 4;
+const itemSize = windowWidth / numColumns - 20;
+
+const inventoryItems = [
+  { id: '1', name: 'Estus Flask', icon: 'https://images.unsplash.com/photo-1602524810963-1a7a7a7a7a7a?auto=format&fit=crop&w=64&q=80' },
+  { id: '2', name: 'Firebomb', icon: 'https://images.unsplash.com/photo-1602524810963-1a7a7a7a7a7a?auto=format&fit=crop&w=64&q=80' },
+  { id: '3', name: 'Longsword', icon: 'https://images.unsplash.com/photo-1602524810963-1a7a7a7a7a7a?auto=format&fit=crop&w=64&q=80' },
+  { id: '4', name: 'Knight Shield', icon: 'https://images.unsplash.com/photo-1602524810963-1a7a7a7a7a7a?auto=format&fit=crop&w=64&q=80' },
+  { id: '5', name: 'Magic Scroll', icon: 'https://images.unsplash.com/photo-1602524810963-1a7a7a7a7a7a?auto=format&fit=crop&w=64&q=80' },
+  { id: '6', name: 'Herb', icon: 'https://images.unsplash.com/photo-1602524810963-1a7a7a7a7a7a?auto=format&fit=crop&w=64&q=80' },
+  { id: '7', name: 'Gold Coin', icon: 'https://images.unsplash.com/photo-1602524810963-1a7a7a7a7a7a?auto=format&fit=crop&w=64&q=80' },
+  { id: '8', name: 'Helmet', icon: 'https://images.unsplash.com/photo-1602524810963-1a7a7a7a7a7a?auto=format&fit=crop&w=64&q=80' },
 ];
 
-const InventoryItem = ({ item }: { item: typeof sampleItems[0] }) => (
-  <View style={styles.itemContainer}>
-    <Image source={{ uri: item.icon }} style={styles.itemIcon} />
-    <Text style={styles.itemName}>{item.name}</Text>
-    <Text style={styles.itemQuantity}>x{item.quantity}</Text>
-  </View>
-);
-
 const InventoryScreen = () => {
+  const renderItem = ({ item }: { item: typeof inventoryItems[0] }) => (
+    <View style={[styles.itemContainer, { width: itemSize, height: itemSize }]}> 
+      <Image source={{ uri: item.icon }} style={styles.itemIcon} />
+      <Text style={styles.itemName} numberOfLines={1}>{item.name}</Text>
+    </View>
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>Inventory</Text>
       <FlatList
-        data={sampleItems}
+        data={inventoryItems}
+        renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <InventoryItem item={item} />}
-        numColumns={2}
+        numColumns={numColumns}
         contentContainerStyle={styles.listContainer}
       />
     </SafeAreaView>
@@ -36,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
-    paddingHorizontal: 16,
+    paddingHorizontal: 10,
   },
   header: {
     fontSize: 28,
@@ -50,26 +57,23 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   itemContainer: {
-    flex: 1,
+    margin: 5,
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    margin: 8,
     borderRadius: 10,
-    padding: 12,
     alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
   },
   itemIcon: {
-    width: 50,
-    height: 50,
+    width: 48,
+    height: 48,
     marginBottom: 8,
+    borderRadius: 6,
   },
   itemName: {
     color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  itemQuantity: {
-    color: '#ccc',
     fontSize: 14,
+    textAlign: 'center',
   },
 });
 
